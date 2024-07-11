@@ -42,8 +42,15 @@ class MultinomialNaiveBayes(lc.LinearClassifier):
         # ----------
         # Solution to Exercise 1
 
-        raise NotImplementedError("Complete Exercise 1")
+        y_reshaped = y.reshape(-1)
 
+        for k, class_ in enumerate(classes):
+            prior[k] = np.sum(y_reshaped == class_) / n_docs
+
+            numerator = (1 + np.sum(x[y_reshaped == class_], axis=0))
+            denominator = n_classes + np.sum(x[y_reshaped == class_])
+            likelihood[:, k] = numerator / denominator
+        
         # End solution to Exercise 1
         # ----------
 
