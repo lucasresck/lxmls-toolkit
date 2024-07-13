@@ -46,8 +46,12 @@ class PytorchMLP(MLP):
 
         # ----------
         # Solution to Exercise 4
+        
+        for n in range(self.num_layers):
+            weight, bias = self.parameters[n]
+            tilde_z = torch.matmul(tilde_z, weight.T) + bias
 
-        raise NotImplementedError("Implement Exercise 4")
+        log_tilde_z = self.log_softmax(tilde_z)
 
         # End of solution to Exercise 4
         # ----------
